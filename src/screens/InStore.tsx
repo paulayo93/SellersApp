@@ -14,7 +14,6 @@ import {resetProduct, useAppSelector} from '../store';
 import {NairaIcon} from '../../assets/icons/icons';
 
 const ProductListCard = ({productName, productPrice, productImage}) => {
-  console.log('Product Image', productImage);
   return (
     <View style={styles.image}>
       <Image
@@ -36,7 +35,6 @@ const InStore = ({navigation}) => {
   const {products, maximumProductExceeded} = useAppSelector(
     state => state?.product,
   );
-  console.log('Products', products);
   return (
     <Container padded={true} light={false}>
       <View style={styles.content}>

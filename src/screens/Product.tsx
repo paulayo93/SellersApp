@@ -57,7 +57,6 @@ const handleSelect = (res, setImages) => {
   } else if (res.errorCode === 'camera_unavailable') {
     console.log('camera not available');
   } else {
-    console.log(res, res.assets);
     return setImages(res.assets);
   }
 };
@@ -110,7 +109,6 @@ const ProductScreen = ({navigation}) => {
 
   const publishProduct = async () => {
     if (maximumProductExceeded) {
-      console.log(maximumProductExceeded);
       toast('Number of Product Exceeded', 'error');
       return;
     }
@@ -157,11 +155,9 @@ const ProductScreen = ({navigation}) => {
 
   const selectAction = () => {
     if (Platform.OS === 'ios') {
-      // console.log('okay')
       ActionSheetIOS.showActionSheetWithOptions(
         {
           options: OPTIONS,
-          // destructiveButtonIndex: 0,
           cancelButtonIndex: OPTIONS.length - 1,
           userInterfaceStyle: 'dark',
         },

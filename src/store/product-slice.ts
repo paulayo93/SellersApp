@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 export interface ProductState {
   id: string;
@@ -6,10 +6,6 @@ export interface ProductState {
   productPrice: string;
   productImage: null;
 }
-
-// export interface ProductListState {
-//   products: ProductState[] | null;
-// }
 
 export interface MainState {
   products?: ProductState[] | null;
@@ -27,7 +23,7 @@ export const productSlice = createSlice({
   reducers: {
     addProduct: (state, action: PayloadAction<ProductState>) => {
       let prodObj = {} as ProductState;
-      console.log(action.payload, 'Action Payload');
+
       if (action.payload) {
         prodObj.productName = action.payload.productName;
         prodObj.productPrice = action.payload.productPrice;
@@ -46,6 +42,6 @@ export const productSlice = createSlice({
     },
   },
 });
-export const { addProduct, resetProduct } = productSlice.actions;
+export const {addProduct, resetProduct} = productSlice.actions;
 
 export default productSlice.reducer;
