@@ -183,6 +183,8 @@ const ProductScreen = ({navigation}) => {
   return (
     <Container padded={true} light={false}>
       <Content style={styles.content}>
+
+        
         <View>
           <RegularText text="Add Product" />
           <View>

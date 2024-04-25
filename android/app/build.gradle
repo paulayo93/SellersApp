@@ -83,6 +83,12 @@ android {
         versionName "1.0"
     }
     signingConfigs {
+        release {
+            storeFile file('sellerapp.keystore')
+            storePassword 'sellerapp'
+            keyAlias 'sellerapp'
+            keyPassword 'sellerapp'
+        }
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'

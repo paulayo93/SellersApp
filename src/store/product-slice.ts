@@ -1,4 +1,4 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface ProductState {
   id: string;
@@ -40,8 +40,18 @@ export const productSlice = createSlice({
       state.products = [];
       state.maximumProductExceeded = false;
     },
+
+    removeProduct: (state, action: PayloadAction<ProductState>) => {
+      const productId = action.payload.id;
+      for (let i = 0; i < state.products.length; ++i) {
+        if (state.products[i].id === productId) {
+          state.products.splice(i, 1);
+          break;
+        }
+      }
+    },
   },
 });
-export const {addProduct, resetProduct} = productSlice.actions;
+export const { addProduct, resetProduct, removeProduct } = productSlice.actions;
 
 export default productSlice.reducer;

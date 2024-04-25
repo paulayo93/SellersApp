@@ -3,6 +3,7 @@ import {FlatList, Image, StyleSheet, View} from 'react-native';
 import {Container} from '../components';
 import {
   Button,
+  Grey400,
   RegularText,
   RoyalBlue600,
   SmallText,
@@ -10,21 +11,41 @@ import {
   ms,
 } from '../common';
 import accounting from 'accounting';
-import {resetProduct, useAppSelector} from '../store';
+import {removeProduct, useAppDispatch, useAppSelector} from '../store';
 import {NairaIcon} from '../../assets/icons/icons';
 
-const ProductListCard = ({productName, productPrice, productImage}) => {
+const ProductListCard = ({
+  productId,
+  productName,
+  productPrice,
+  productImage,
+}) => {
+  const dispatch = useAppDispatch();
   return (
-    <View style={styles.image}>
+    <View style={styles.product}>
       <Image
         style={{width: ms(100), height: ms(100), borderRadius: ms(10)}}
         source={{uri: productImage}}
       />
       <View style={{marginLeft: ms(26)}}>
-        <SmallText text={productName} />
-        <View style={styles.money}>
-          <NairaIcon />
-          <SmallText text={accounting.formatMoney(productPrice, '', 2)} />
+        <View>
+          <SmallText text={productName} />
+          <View style={styles.money}>
+            <NairaIcon />
+            <SmallText text={accounting.formatMoney(productPrice, '', 2)} />
+          </View>
+        </View>
+        <View style={{top: 18, right: 15}}>
+          <Button
+            text="Remove"
+            textStyle={[styles.removeButtonText, {color: White}]}
+            style={{
+              backgroundColor: Grey400,
+              width: ms(70),
+              height: ms(30),
+            }}
+            onPress={() => dispatch(removeProduct({id: productId}))}
+          />
         </View>
       </View>
     </View>
@@ -70,6 +91,7 @@ const InStore = ({navigation}) => {
                   productImage={item.productImage?.[0].uri}
                   productName={item.productName}
                   productPrice={item.productPrice}
+                  productId={item.id}
                 />
               </View>
             );
@@ -81,7 +103,13 @@ const InStore = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  image: {flexDirection: 'row', marginBottom: ms(20)},
+  removeButtonText: {
+    fontFamily: 'Inter-Medium',
+    fontSize: 13,
+    lineHeight: 19,
+    color: RoyalBlue600,
+  },
+  product: {flexDirection: 'row', marginBottom: ms(20)},
   money: {
     flexDirection: 'row',
     marginTop: ms(10),
