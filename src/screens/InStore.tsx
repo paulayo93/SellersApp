@@ -46,6 +46,21 @@ const InStore = ({navigation}) => {
       <View style={styles.list}>
         <FlatList
           data={products}
+          // eslint-disable-next-line react/no-unstable-nested-components
+          ListFooterComponent={() => {
+            return (
+              <View>
+                {!maximumProductExceeded && (
+                  <Button
+                    text="Add Product"
+                    textStyle={[styles.buttonText, {color: White}]}
+                    style={styles.button}
+                    onPress={() => navigation.navigate('product')}
+                  />
+                )}
+              </View>
+            );
+          }}
           showsHorizontalScrollIndicator={false}
           horizontal={false}
           keyExtractor={item => item.id}
@@ -63,14 +78,6 @@ const InStore = ({navigation}) => {
           }}
         />
       </View>
-      {!maximumProductExceeded && (
-        <Button
-          text="Add Product"
-          textStyle={[styles.buttonText, {color: White}]}
-          style={styles.button}
-          onPress={() => navigation.navigate('product')}
-        />
-      )}
     </Container>
   );
 };
